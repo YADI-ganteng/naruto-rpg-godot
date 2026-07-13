@@ -1,0 +1,23 @@
+{
+  "rasengan": {
+    "damage": 80,
+    "cp": 30
+  },
+  "chidori": {
+    "damage": 90,
+    "cp": 35
+  },
+  "amaterasu": {
+    "damage": 120,
+    "cp": 50
+  },
+  "healing": {
+    "damage": 0,
+    "cp": 40,
+    "heal": 100
+  },
+  "ultimate": {
+    "damage": 200,
+    "cp": 100
+  }
+}
