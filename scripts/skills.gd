@@ -1,4 +1,3 @@
 extends Node
 var skills={}
-func _ready():load_skills()
-func load_skills():pass
+func use_skill(n,u):return skills.get(n,{})
