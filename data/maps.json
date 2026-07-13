@@ -1,0 +1,14 @@
+{
+  "village": {
+    "name": "Konoha",
+    "enemies": [
+      "bandit"
+    ]
+  },
+  "forest": {
+    "name": "Forest",
+    "enemies": [
+      "ninja"
+    ]
+  }
+}
