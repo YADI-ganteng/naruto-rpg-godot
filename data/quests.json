@@ -2,74 +2,13 @@
   {
     "id": 1,
     "name": "Kalahkan Bandit",
-    "description": "Kalahkan 5 bandit di hutan",
-    "objective": {
-      "type": "kill",
-      "target": "bandit",
-      "count": 5
-    },
-    "reward": {
-      "gold": 100,
-      "exp": 50
-    },
-    "npc": "Kakashi"
+    "count": 5,
+    "reward": 100
   },
   {
     "id": 2,
     "name": "Cari Ramuan",
-    "description": "Kumpulkan 3 ramuan obat",
-    "objective": {
-      "type": "collect",
-      "item": "ramuan",
-      "count": 3
-    },
-    "reward": {
-      "gold": 150,
-      "item": "Health Potion"
-    },
-    "npc": "Tsunade"
-  },
-  {
-    "id": 3,
-    "name": "Antar Surat",
-    "description": "Antarkan surat ke desa tetangga",
-    "objective": {
-      "type": "deliver",
-      "npc": "Iruka"
-    },
-    "reward": {
-      "gold": 80,
-      "exp": 30
-    },
-    "npc": "Hiruzen"
-  },
-  {
-    "id": 4,
-    "name": "Latihan Jutsu",
-    "description": "Gunakan skill 10 kali",
-    "objective": {
-      "type": "skill_use",
-      "count": 10
-    },
-    "reward": {
-      "gold": 200,
-      "exp": 100
-    },
-    "npc": "Jiraiya"
-  },
-  {
-    "id": 5,
-    "name": "Bos Orochimaru",
-    "description": "Kalahkan Orochimaru!",
-    "objective": {
-      "type": "kill",
-      "target": "boss_orochimaru",
-      "count": 1
-    },
-    "reward": {
-      "gold": 500,
-      "item": "Kusanagi Sword"
-    },
-    "npc": "Tsunade"
+    "count": 3,
+    "reward": 150
   }
 ]
