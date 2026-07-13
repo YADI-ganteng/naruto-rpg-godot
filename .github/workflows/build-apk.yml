@@ -11,43 +11,34 @@ jobs:
 
     steps:
 
-    - name: Checkout Repository
+    - name: Checkout
       uses: actions/checkout@v4
 
 
-    - name: Setup Godot 4.3
+    - name: Setup Godot
       uses: chickensoft-games/setup-godot@v2
       with:
         version: "4.3.0"
         use-dotnet: false
+        include-templates: true
 
 
     - name: Install Android SDK
       uses: android-actions/setup-android@v3
 
 
-    - name: Install Godot Export Templates
+    - name: Verify Godot Templates
       run: |
-        mkdir -p ~/.local/share/godot/export_templates/4.3.stable
-
-        wget -q https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_export_templates.tpz
-
-        unzip -o Godot_v4.3-stable_export_templates.tpz -d /tmp/godot_templates
-
-        cp -r /tmp/godot_templates/templates/* ~/.local/share/godot/export_templates/4.3.stable/
+        echo "Checking templates..."
+        find ~/.local/share/godot/export_templates -type f | head -20
 
 
-    - name: Check Godot Project
+    - name: Check Project
       run: |
         godot --headless --editor --quit
 
 
-    - name: Check Export Templates
-      run: |
-        ls -la ~/.local/share/godot/export_templates/4.3.stable
-
-
-    - name: Build Android APK
+    - name: Export APK
       run: |
         mkdir -p build
         godot --headless --path . --export-release "Android" build/naruto-rpg.apk
@@ -56,5 +47,5 @@ jobs:
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
-        name: Naruto-RPG-Android-APK
+        name: Naruto-RPG-APK
         path: build/naruto-rpg.apk
