@@ -13,10 +13,11 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
-    - name: Install Godot
-      uses: chickensoft-games/setup-godot@v2
-      with:
-        version: "4.3"
+    - name: Setup Godot
+  uses: chickensoft-games/setup-godot@v2
+  with:
+    version: "4.3.0"
+    use-dotnet: false
 
     - name: Import Project
       run: godot --headless --editor --quit
