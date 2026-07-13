@@ -6,8 +6,10 @@ on:
       - main
   workflow_dispatch:
 
+
 jobs:
   build:
+
     runs-on: ubuntu-latest
 
     steps:
@@ -23,38 +25,41 @@ jobs:
           use-dotnet: false
 
 
-      - name: Install Android Export Templates
+      - name: Install Godot Android Export Templates
         run: |
           mkdir -p ~/.local/share/godot/export_templates/4.3.stable
 
-          wget -q https://downloads.tuxfamily.org/godotengine/4.3/Godot_v4.3-stable_export_templates.tpz
+          wget -O templates.tpz \
+          https://downloads.tuxfamily.org/godotengine/4.3/Godot_v4.3-stable_export_templates.tpz
 
-          unzip -o Godot_v4.3-stable_export_templates.tpz \
-          -d ~/.local/share/godot/export_templates/4.3.stable
+          mkdir templates
 
-          mv ~/.local/share/godot/export_templates/4.3.stable/templates/* \
+          unzip -o templates.tpz -d templates
+
+          cp -r templates/templates/* \
           ~/.local/share/godot/export_templates/4.3.stable/
 
-          rm -rf ~/.local/share/godot/export_templates/4.3.stable/templates
-
-          rm Godot_v4.3-stable_export_templates.tpz
-
-
-      - name: Check Godot Templates
-        run: |
           echo "Checking templates..."
           ls -la ~/.local/share/godot/export_templates/4.3.stable
 
 
-      - name: Install Android SDK
-        uses: android-actions/setup-android@v3
-
-
-      - name: Setup Java
+      - name: Setup Java 17
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: "17"
+
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+
+      - name: Verify Godot Project
+        run: |
+          echo "Project files:"
+          ls -la
+          echo "Export presets:"
+          cat export_presets.cfg
 
 
       - name: Build Android APK
@@ -72,5 +77,5 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: Godot-RPG-Android-APK
+          name: Naruto-RPG-Android-APK
           path: build/game.apk
