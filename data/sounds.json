@@ -1,0 +1,38 @@
+{
+  "combat": [
+    "slash",
+    "hit",
+    "critical_hit",
+    "block",
+    "parry",
+    "sword_clash"
+  ],
+  "skills": [
+    "rasengan",
+    "chidori",
+    "explosion",
+    "heal",
+    "power_up",
+    "ultimate_charge",
+    "ultimate_release"
+  ],
+  "ui": [
+    "click",
+    "select",
+    "confirm",
+    "cancel",
+    "buy",
+    "sell",
+    "level_up",
+    "quest_complete",
+    "error"
+  ],
+  "bgm": [
+    "village_theme",
+    "battle_theme",
+    "boss_theme",
+    "victory",
+    "game_over"
+  ],
+  "voice": []
+}
