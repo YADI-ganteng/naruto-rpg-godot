@@ -1,0 +1,4 @@
+[gd_scene format=3]
+[application]
+config/name="Naruto RPG"
+run/main_scene="scenes/maps/MainScene.tscn"
