@@ -2,31 +2,26 @@
   {
     "name": "Naruto",
     "hp": 500,
-    "atk": 50,
-    "skill": "Rasengan"
+    "atk": 50
   },
   {
     "name": "Sasuke",
     "hp": 450,
-    "atk": 55,
-    "skill": "Chidori"
+    "atk": 55
   },
   {
     "name": "Sakura",
     "hp": 400,
-    "atk": 45,
-    "skill": "Super Punch"
+    "atk": 45
   },
   {
     "name": "Kakashi",
     "hp": 480,
-    "atk": 52,
-    "skill": "Lightning Blade"
+    "atk": 52
   },
   {
     "name": "Itachi",
     "hp": 420,
-    "atk": 60,
-    "skill": "Amaterasu"
+    "atk": 60
   }
 ]
