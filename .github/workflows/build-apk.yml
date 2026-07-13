@@ -1,35 +1,64 @@
-name: Build Godot Android
+name: Godot RPG Android Build
 
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
 
-    - name: Setup Godot
-  uses: chickensoft-games/setup-godot@v2
-  with:
-    version: "4.3.0"
+      # Ambil source code dari repository
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-    - name: Import Project
-      run: godot --headless --editor --quit
 
-    - name: Build Android
-      run: |
-        mkdir -p build
-        godot --headless --path . \
-        --export-release "Android" \
-        build/NarutoRPG.apk
+      # Install Godot 4.3
+      - name: Setup Godot
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: "4.3.0"
+          use-dotnet: false
 
-    - name: Upload APK
-      uses: actions/upload-artifact@v4
-      with:
-        name: NarutoRPG-Android
-        path: build/NarutoRPG.apk
+
+      # Cek struktur project Godot
+      - name: Verify Godot Project
+        run: |
+          ls -la
+          test -f project.godot
+          echo "Godot project ditemukan"
+
+
+      # Import project agar Godot membaca semua resource
+      - name: Import Godot Project
+        run: |
+          godot --headless --editor --quit
+
+
+      # Install Android export template
+      - name: Setup Android Export Templates
+        run: |
+          godot --headless --editor --quit --install-android-build-template
+
+
+      # Build APK Android
+      - name: Export Android APK
+        run: |
+          mkdir -p build
+          godot --headless \
+          --path . \
+          --export-release "Android" \
+          build/NarutoRPG.apk
+
+
+      # Simpan APK hasil build
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Naruto-RPG-Android
+          path: build/NarutoRPG.apk
