@@ -1,94 +1,17 @@
 [
   {
     "name": "Health Potion",
-    "type": "consumable",
-    "effect": {
-      "heal": 100
-    },
-    "price": 50,
-    "rarity": "common"
+    "type": "heal",
+    "value": 100
   },
   {
     "name": "Chakra Potion",
-    "type": "consumable",
-    "effect": {
-      "cp_restore": 50
-    },
-    "price": 40,
-    "rarity": "common"
+    "type": "cp",
+    "value": 50
   },
   {
     "name": "Kunai",
     "type": "weapon",
-    "effect": {
-      "atk_bonus": 10
-    },
-    "price": 100,
-    "rarity": "common"
-  },
-  {
-    "name": "Shuriken",
-    "type": "weapon",
-    "effect": {
-      "atk_bonus": 15
-    },
-    "price": 150,
-    "rarity": "common"
-  },
-  {
-    "name": "Scroll of Healing",
-    "type": "scroll",
-    "effect": {
-      "heal": 300
-    },
-    "price": 200,
-    "rarity": "rare"
-  },
-  {
-    "name": "Demon Wind Shuriken",
-    "type": "weapon",
-    "effect": {
-      "atk_bonus": 30
-    },
-    "price": 500,
-    "rarity": "rare"
-  },
-  {
-    "name": "Samehada",
-    "type": "weapon",
-    "effect": {
-      "atk_bonus": 50,
-      "cp_drain": 10
-    },
-    "price": 1000,
-    "rarity": "legendary"
-  },
-  {
-    "name": "Kusanagi Sword",
-    "type": "weapon",
-    "effect": {
-      "atk_bonus": 45
-    },
-    "price": 800,
-    "rarity": "epic"
-  },
-  {
-    "name": "Akatsuki Cloak",
-    "type": "armor",
-    "effect": {
-      "def_bonus": 25
-    },
-    "price": 600,
-    "rarity": "rare"
-  },
-  {
-    "name": "Hokage Hat",
-    "type": "armor",
-    "effect": {
-      "def_bonus": 40,
-      "hp_bonus": 200
-    },
-    "price": 2000,
-    "rarity": "legendary"
+    "atk": 10
   }
 ]
