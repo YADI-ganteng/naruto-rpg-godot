@@ -28,35 +28,5 @@
     "hp": 420,
     "atk": 60,
     "skill": "Amaterasu"
-  },
-  {
-    "name": "Jiraiya",
-    "hp": 520,
-    "atk": 48,
-    "skill": "Rasengan Giant"
-  },
-  {
-    "name": "Tsunade",
-    "hp": 550,
-    "atk": 55,
-    "skill": "Super Strength"
-  },
-  {
-    "name": "Gaara",
-    "hp": 500,
-    "atk": 47,
-    "skill": "Sand Burial"
-  },
-  {
-    "name": "Minato",
-    "hp": 470,
-    "atk": 58,
-    "skill": "Flying Raijin"
-  },
-  {
-    "name": "Orochimaru",
-    "hp": 460,
-    "atk": 50,
-    "skill": "Snake Jutsu"
   }
 ]
