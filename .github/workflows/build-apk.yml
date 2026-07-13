@@ -1,90 +1,35 @@
-name: Build APK
+name: Build Godot Android
 
-on: workflow_dispatch
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+
     steps:
-    - uses: actions/checkout@v4
-    
-    - name: Setup Java
-      uses: actions/setup-java@v4
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Install Godot
+      uses: chickensoft-games/setup-godot@v2
       with:
-        java-version: '17'
-        distribution: 'temurin'
-    
-    - name: Setup Android SDK
-      uses: android-actions/setup-android@v3
-    
-    - name: Create APK
+        version: "4.3"
+
+    - name: Import Project
+      run: godot --headless --editor --quit
+
+    - name: Build Android
       run: |
-        echo "Creating Android project..."
-        
-        mkdir -p app/src/main/java/com/rpg/naruto
-        mkdir -p app/src/main/res/values
-        mkdir -p app/src/main/assets
-        
-        # Copy game files to assets
-        if [ -f index.html ]; then
-          cp index.html app/src/main/assets/
-        else
-          echo "Creating default game..."
-          printf '<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Naruto RPG</title><style>*{margin:0;padding:0}body{background:#0a0a1a;color:white;font-family:Arial;text-align:center;padding:20px}h1{color:#ff6b35}button{background:#ff6b35;color:white;border:none;padding:15px 30px;font-size:1.2em;border-radius:30px;margin:8px}.bar{width:200px;height:20px;background:#333;border-radius:10px;margin:10px auto}.fill{height:100%%;background:#4CAF50;width:100%%}</style></head><body><h1>NARUTO RPG</h1><p>HP: <b id="hp">500</b></p><div class="bar"><div class="fill" id="bar"></div></div><button onclick="atk(50)">ATTACK</button><button onclick="atk(100)">SKILL</button><button onclick="atk(200)">ULTIMATE</button><button onclick="hp=500;update()">RESET</button><script>var hp=500;function atk(d){hp-=d;if(hp<0)hp=0;update()}function update(){document.getElementById("hp").textContent=hp;document.getElementById("bar").style.width=(hp/500*100)+"%%"}</script></body></html>' > app/src/main/assets/index.html
-        fi
-        
-        # Copy assets
-        cp -r assets app/src/main/ 2>/dev/null || true
-        cp -r sprites app/src/main/assets/ 2>/dev/null || true
-        cp -r scenes app/src/main/assets/ 2>/dev/null || true
-        cp -r scripts app/src/main/assets/ 2>/dev/null || true
-        cp -r data app/src/main/assets/ 2>/dev/null || true
-        
-        # AndroidManifest.xml
-        printf '<?xml version="1.0" encoding="utf-8"?>\n<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.rpg.naruto">\n<uses-permission android:name="android.permission.INTERNET"/>\n<application android:label="Naruto RPG" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">\n<activity android:name=".MainActivity" android:exported="true" android:screenOrientation="landscape">\n<intent-filter><action android:name="android.intent.action.MAIN"/><category android:name="android.intent.category.LAUNCHER"/></intent-filter>\n</activity></application></manifest>\n' > app/src/main/AndroidManifest.xml
-        
-        # MainActivity.java
-        printf 'package com.rpg.naruto;\nimport android.app.Activity;\nimport android.os.Bundle;\nimport android.webkit.WebView;\nimport android.webkit.WebSettings;\nimport android.view.Window;\nimport android.view.WindowManager;\npublic class MainActivity extends Activity {\n@Override\nprotected void onCreate(Bundle s) {\nsuper.onCreate(s);\nrequestWindowFeature(Window.FEATURE_NO_TITLE);\ngetWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);\nWebView wv = new WebView(this);\nWebSettings ws = wv.getSettings();\nws.setJavaScriptEnabled(true);\nws.setDomStorageEnabled(true);\nws.setAllowFileAccess(true);\nwv.loadUrl("file:///android_asset/index.html");\nsetContentView(wv);\n}}\n' > app/src/main/java/com/rpg/naruto/MainActivity.java
-        
-        # strings.xml
-        printf '<?xml version="1.0" encoding="utf-8"?>\n<resources><string name="app_name">Naruto RPG</string></resources>\n' > app/src/main/res/values/strings.xml
-        
-        # Build files
-        printf 'rootProject.name = "NarutoRPG"\ninclude ":app"\n' > settings.gradle
-        
-        printf 'buildscript { repositories { google(); mavenCentral() } dependencies { classpath "com.android.tools.build:gradle:7.4.2" } }\nallprojects { repositories { google(); mavenCentral() } }\n' > build.gradle
-        
-        printf 'apply plugin: "com.android.application"\nandroid {\nnamespace "com.rpg.naruto"\ncompileSdkVersion 33\ndefaultConfig {\napplicationId "com.rpg.naruto"\nminSdkVersion 21\ntargetSdkVersion 33\nversionCode 1\nversionName "1.0"\n}\nbuildTypes { debug { debuggable true } }\n}\n' > app/build.gradle
-        
-        printf 'android.useAndroidX=true\norg.gradle.jvmargs=-Xmx2048m\n' > gradle.properties
-        
-        echo "Project created!"
-    
-    - name: Build APK
-      run: |
-        wget -q https://services.gradle.org/distributions/gradle-7.6-bin.zip
-        unzip -q gradle-7.6-bin.zip
-        export PATH=$PWD/gradle-7.6/bin:$PATH
-        gradle wrapper --gradle-version 7.6
-        chmod +x gradlew
-        ./gradlew assembleDebug --no-daemon 2>&1 | tail -20
-        find . -name "*.apk" -type f -ls
-    
+        mkdir -p build
+        godot --headless --path . \
+        --export-release "Android" \
+        build/NarutoRPG.apk
+
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
-        name: NarutoRPG-APK
-        path: "**/*.apk"
-        if-no-files-found: warn
-    
-    - name: Create Release
-      uses: softprops/action-gh-release@v2
-      with:
-        files: "**/*.apk"
-        tag_name: apk-build
-        name: "📱 Naruto RPG APK"
-        body: "Download & Install!"
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      continue-on-error: true
+        name: NarutoRPG-Android
+        path: build/NarutoRPG.apk
