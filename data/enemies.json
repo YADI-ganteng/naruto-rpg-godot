@@ -1,68 +1,14 @@
 {
   "bandit": {
-    "name": "Bandit",
     "hp": 80,
-    "atk": 10,
-    "speed": 150,
-    "exp": 20,
-    "gold": 15,
-    "level": 1
+    "atk": 10
   },
-  "ninja_liar": {
-    "name": "Ninja Liar",
+  "ninja": {
     "hp": 120,
-    "atk": 15,
-    "speed": 200,
-    "exp": 35,
-    "gold": 25,
-    "level": 2
+    "atk": 15
   },
-  "ronin": {
-    "name": "Ronin",
-    "hp": 180,
-    "atk": 20,
-    "speed": 180,
-    "exp": 50,
-    "gold": 40,
-    "level": 3
-  },
-  "akatsuki_member": {
-    "name": "Akatsuki Member",
-    "hp": 250,
-    "atk": 30,
-    "speed": 250,
-    "exp": 80,
-    "gold": 60,
-    "level": 5
-  },
-  "boss_orochimaru": {
-    "name": "Orochimaru",
+  "boss": {
     "hp": 500,
-    "atk": 50,
-    "speed": 300,
-    "exp": 200,
-    "gold": 200,
-    "level": 10,
-    "boss": true
-  },
-  "boss_pain": {
-    "name": "Pain",
-    "hp": 600,
-    "atk": 60,
-    "speed": 280,
-    "exp": 300,
-    "gold": 300,
-    "level": 12,
-    "boss": true
-  },
-  "boss_madara": {
-    "name": "Madara",
-    "hp": 800,
-    "atk": 80,
-    "speed": 350,
-    "exp": 500,
-    "gold": 500,
-    "level": 15,
-    "boss": true
+    "atk": 50
   }
 }
