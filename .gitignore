@@ -1,0 +1,74 @@
+# Godot
+.godot/
+*.import
+*.translation
+*.scn.import
+*.mesh.import
+.mono/
+data_*/
+monodata/
+
+# Build artifacts
+build/
+dist/
+*.apk
+*.aab
+*.ipa
+*.exe
+*.app/
+
+# Android
+android/.gradle/
+android/.idea/
+android/local.properties
+android/build/
+android/.DS_Store
+android/*.jks
+android/*.keystore
+android/app/build/
+android/gradlew
+android/gradlew.bat
+.gradle/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.sublime-project
+*.sublime-workspace
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Build files
+*.o
+*.a
+*.so
+*.dylib
+
+# Temporary files
+*.tmp
+*.bak
+*.log
+
+# Keystore (keep private)
+*.keystore
+*.jks
+*.p12
+
+# Node/npm
+node_modules/
+npm-debug.log*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+
+# Compiled files
+*.gd.json
